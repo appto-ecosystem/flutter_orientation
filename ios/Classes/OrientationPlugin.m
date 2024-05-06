@@ -91,14 +91,18 @@ const char* const kOrientationUpdateNotificationKey = "io.flutter.plugin.platfor
      withHandler:^(CMDeviceMotion* motion, NSError* error) {
          double gravityX = motion.gravity.x;
          double gravityY = motion.gravity.y;
+         double gravityZ = fabs(motion.gravity.z); // 添加 Z 轴的重力值
+         BOOL isHorizontal = 0.998<gravityZ&&gravityZ < 1; // 根据实际情况调整阈值
+        
          int angle = round(atan2(gravityX, gravityY) / M_PI * 180.0 + 180);
          if ((self.currentOrientation == 0 && (angle >= 300 || angle <= 60)) ||
              (self.currentOrientation == 1 && (angle >= 30 && angle <= 150)) ||
              (self.currentOrientation == 2 && (angle >= 120 && angle <= 240)) ||
-             (self.currentOrientation == 3 && (angle >= 210 && angle <= 330))) {
+             (self.currentOrientation == 3 && (angle >= 270 && angle <= 330)) ||isHorizontal) {
          } else {
              self.currentOrientation = (angle + 45) % 360 / 90;
          }
+      
          if (self.currentOrientation == 0) {
              eventSink(@"DeviceOrientation.portraitUp");
          } else if (self.currentOrientation == 1) {

@@ -78,6 +78,15 @@ class _MyAppState extends State<MyApp> {
                     OrientationHelper.setEnabledSystemUIOverlays(
                         SystemUiOverlay.values);
                   }),
+              ElevatedButton(
+                  child: Text('强制横屏'),
+                  onPressed: () {
+                    // 强制横屏
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.landscapeLeft,
+                      DeviceOrientation.landscapeRight
+                    ]);
+                  }),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
