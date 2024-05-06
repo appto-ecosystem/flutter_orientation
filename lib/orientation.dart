@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-// 为 DeviceOrientation 添加扩展方法
 
 class OrientationPlugin {
   static const _methodChannel =
@@ -69,7 +68,7 @@ class OrientationPlugin {
     } else if (value == DeviceOrientation.landscapeRight.toString()) {
       return DeviceOrientation.landscapeRight;
     } else {
-      return DeviceOrientation.landscapeRight;
+      throw FlutterError('Unknow orientation');
     }
   }
 }
