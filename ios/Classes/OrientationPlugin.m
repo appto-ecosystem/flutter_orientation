@@ -92,7 +92,7 @@ const char* const kOrientationUpdateNotificationKey = "io.flutter.plugin.platfor
          double gravityX = motion.gravity.x;
          double gravityY = motion.gravity.y;
          double gravityZ = fabs(motion.gravity.z); // 添加 Z 轴的重力值
-         BOOL isHorizontal = 0.998<gravityZ&&gravityZ < 1; // 根据实际情况调整阈值
+         BOOL isHorizontal = 0.997<gravityZ&&gravityZ < 1; // 根据实际情况调整阈值
         
          int angle = round(atan2(gravityX, gravityY) / M_PI * 180.0 + 180);
          if ((self.currentOrientation == 0 && (angle >= 300 || angle <= 60)) ||
